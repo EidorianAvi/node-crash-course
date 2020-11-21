@@ -1,15 +1,37 @@
 const express = require('express');
+const morgan = require('morgan');
 
 // express app
 const app = express();
 
+// register view engine
+app.set('view engine', 'ejs');
+
 // listen for requests
 app.listen(3000);
 
-// register view engine
-app.set('view engine', 'ejs');
-// app.set('views', 'myviews');
 
+//middleware
+// app.use((req, res, next) => {
+  //   console.log('new request made:');
+  //   console.log('host: ', req.hostname);
+  //   console.log('path: ', req.path);
+  //   console.log('method: ', req.method);
+  //   next();
+  // });
+  
+  // app.use((req, res, next) => {
+    //   console.log('in the next middleware');
+    //   next();
+    // });
+
+// middleware & static files
+
+app.use(express.static('publlic'));
+
+app.use(morgan('dev'));
+
+// app.set('views', 'myviews');
 app.get('/', (req, res) => {
   const blogs = [
     {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
