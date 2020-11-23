@@ -1,14 +1,23 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+
 
 // express app
 const app = express();
 
-// register view engine
+//connect to mongodb
+const dbURI = 'mongodb+srv://EidorianAvi:test1234@cluster0.4fnkg.mongodb.net/node-tuts?retryWrites=true&w=majority';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((results) => app.listen(3000))
+  .catch((err) => console.log(err));
+
+
+  // register view engine
 app.set('view engine', 'ejs');
 
 // listen for requests
-app.listen(3000);
+// app.listen(3000)
 
 
 //middleware
